@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta content="{{RP_ID}}" name="rp-id" />
+		<title>Authentification</title>
+		<link href="data:," rel="icon" />
+		<link href="style.css" rel="stylesheet" />
+		<script src="app.js" type="module"></script>
+	</head>
+	<body>
+		<main>
+			<auth-app>Chargement…</auth-app>
+		</main>
+		<noscript>JavaScript est nécessaire pour utiliser les formulaires.</noscript>
+
+		<template id="auth-login">
+			<h1 tabindex="-1">Connexion</h1>
+			<form>
+				<fieldset>
+					<label>Pseudo<input autocomplete="username webauthn" name="username" /></label>
+					<button>Se connecter avec une passkey</button>
+					<button class="secondary" data-screen="auth-register" type="button">
+						Créer un compte
+					</button>
+					<button class="secondary" data-screen="auth-recovery-request" type="button">
+						J’ai perdu mes passkeys
+					</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-register">
+			<h1 tabindex="-1">Inscription</h1>
+			<form>
+				<fieldset>
+					<label
+						>Pseudo<input
+							autocomplete="username"
+							maxlength="30"
+							minlength="3"
+							name="username"
+							pattern="[A-Za-z0-9_.]+"
+							required
+							title="Lettres, chiffres, points ou tirets bas (3 à 30 caractères)"
+					/></label>
+					<label>Nom<input autocomplete="name" name="displayName" required /></label>
+					<label>Email<input autocomplete="email" name="email" required type="email" /></label>
+					<label>Nom de la passkey<input name="passkeyName" required /></label>
+					<button>Créer le compte</button>
+					<button class="secondary" data-screen="auth-login" type="button">Retour</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-account">
+			<h1 tabindex="-1">Compte connecté</h1>
+			<p data-user></p>
+			<h2>Passkeys</h2>
+			<ul data-passkeys></ul>
+			<form>
+				<fieldset>
+					<label>Nom de la passkey<input name="passkeyName" required /></label>
+					<button>Ajouter une passkey</button>
+					<button class="secondary" data-logout type="button">Se déconnecter</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-recovery-request">
+			<h1 tabindex="-1">Passkeys perdues</h1>
+			<form>
+				<fieldset>
+					<label
+						>Email du compte<input autocomplete="email" name="email" required type="email"
+					/></label>
+					<button>Recevoir un lien de récupération</button>
+					<button class="secondary" data-screen="auth-login" type="button">Retour</button>
+				</fieldset>
+			</form>
+			<p data-sent hidden role="status">
+				Si un compte utilise cet email, un lien de récupération vient d’y être envoyé.
+			</p>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-recovery">
+			<h1 tabindex="-1">Nouvelle passkey</h1>
+			<form>
+				<fieldset>
+					<label>Nom de la passkey<input name="passkeyName" required /></label>
+					<button>Créer la passkey</button>
+					<button class="secondary" data-screen="auth-login" type="button">
+						Retour à la connexion
+					</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-passkey">
+			<li>
+				<strong data-name></strong>
+				<small data-details></small>
+				<button class="secondary" data-delete type="button">Supprimer</button>
+			</li>
+		</template>
+	</body>
+</html>

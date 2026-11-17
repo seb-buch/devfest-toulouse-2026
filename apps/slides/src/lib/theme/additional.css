@@ -1,0 +1,15 @@
+/*
+ * Styles hors thème : ressources utilisées par certaines diapos ou certains composants seulement.
+ * Le thème des diapositives est dans theme.css.
+ */
+
+/*  Titre de la carte  */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/*  Police du logo GTA (Typodermic, gratuite)  */
+@font-face {
+	font-family: 'Pricedown';
+	src: url('../assets/fonts/Pricedown Bl.woff2') format('woff2');
+	font-weight: 400;
+	font-display: block;
+}

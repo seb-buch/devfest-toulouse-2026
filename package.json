@@ -1,0 +1,34 @@
+{
+	"name": "presentation-devfest-toulouse-2026",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"scripts": {
+		"preview": "bash scripts/run.sh preview",
+		"dev": "bash scripts/run.sh dev",
+		"dev:slides": "bun run --filter slides-devfest-toulouse-2026 dev",
+		"dev:hybrid": "bun run --filter auth-hybrid dev",
+		"dev:passkeys": "bun run --filter auth-passkeys dev",
+		"build": "bun run --filter '*' build",
+		"check": "bun run --filter '*' check",
+		"lint": "bun run --filter '*' lint",
+		"format": "bun run --filter '*' format"
+	},
+	"devDependencies": {
+		"@types/bun": "1.4.4",
+		"@types/node": "^24",
+		"globals": "^17.6.0",
+		"@eslint/js": "^10.0.1",
+		"typescript-eslint": "^8.60.1",
+		"eslint": "^10.4.1",
+		"eslint-config-prettier": "^10.1.8",
+		"prettier": "^3.8.3"
+	},
+	"peerDependencies": {
+		"typescript": "6.0.2"
+	}
+}

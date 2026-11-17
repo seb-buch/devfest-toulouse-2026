@@ -1,0 +1,42 @@
+{
+	# Certificates come from mkcert (see infra/certs), Caddy must not request any.
+	auto_https disable_certs
+}
+
+gta-passkeys-city.demo {
+	tls /certs/gta-passkeys-city.demo.pem /certs/gta-passkeys-city.demo-key.pem
+
+	handle_path /hybrid/* {
+		reverse_proxy host.docker.internal:3001
+	}
+
+	handle_path /passkeys/* {
+		reverse_proxy host.docker.internal:3002
+	}
+
+	# Related Origin Requests: list of the other sites allowed to use this RP ID.
+	handle /.well-known/webauthn {
+		reverse_proxy host.docker.internal:3002
+	}
+
+	# Mailpit serves itself under /mail/ (MP_WEBROOT), the prefix must be kept.
+	redir /mail /mail/ 308
+	handle /mail/* {
+		reverse_proxy mailpit:8025
+	}
+
+	handle {
+		reverse_proxy host.docker.internal:5173
+	}
+}
+
+# Related origin: same passkeys app on another domain, the RP ID stays gta-passkeys-city.demo.
+devfest-toulouse-2026.demo {
+	tls /certs/devfest-toulouse-2026.demo.pem /certs/devfest-toulouse-2026.demo-key.pem
+
+	handle_path /passkeys/* {
+		reverse_proxy host.docker.internal:3002
+	}
+
+	redir / /passkeys/ui/ 302
+}

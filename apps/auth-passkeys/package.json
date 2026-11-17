@@ -1,0 +1,19 @@
+{
+	"name": "auth-passkeys",
+	"type": "module",
+	"scripts": {
+		"dev": "bun run --hot src/index.ts",
+		"start": "bun run src/index.ts",
+		"lint": "prettier --ignore-path .gitignore --ignore-path ../../.prettierignore --check . && eslint .",
+		"format": "prettier --ignore-path .gitignore --ignore-path ../../.prettierignore --write ."
+	},
+	"dependencies": {
+		"@simplewebauthn/server": "^14.0.3",
+		"hono": "^4.13.14",
+		"nodemailer": "^10.3.1"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/nodemailer": "^8.0.2"
+	}
+}

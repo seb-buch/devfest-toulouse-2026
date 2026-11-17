@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<title>Authentification</title>
+		<link href="data:," rel="icon" />
+		<link href="style.css" rel="stylesheet" />
+		<script src="app.js" type="module"></script>
+	</head>
+	<body>
+		<main>
+			<auth-demo>Chargement…</auth-demo>
+		</main>
+		<noscript>JavaScript est nécessaire pour utiliser les formulaires.</noscript>
+
+		<template id="auth-login">
+			<h1 tabindex="-1">Connexion</h1>
+			<form>
+				<fieldset>
+					<label
+						>Email ou pseudo<input autocomplete="username webauthn" name="identifier" required
+					/></label>
+					<label
+						>Mot de passe<input
+							autocomplete="current-password"
+							name="password"
+							required
+							type="password"
+					/></label>
+					<button>Se connecter</button>
+					<button class="secondary" data-screen="auth-register" type="button">
+						Créer un compte
+					</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-register">
+			<h1 tabindex="-1">Inscription</h1>
+			<form>
+				<fieldset>
+					<label>Nom<input autocomplete="name" name="name" required /></label>
+					<label
+						>Pseudo<input
+							autocomplete="username"
+							maxlength="30"
+							minlength="3"
+							name="username"
+							pattern="[A-Za-z0-9_.]+"
+							required
+							title="Lettres, chiffres, points ou tirets bas (3 à 30 caractères)"
+					/></label>
+					<label>Email<input autocomplete="email" name="email" required type="email" /></label>
+					<label
+						>Mot de passe<input
+							autocomplete="new-password"
+							maxlength="128"
+							minlength="8"
+							name="password"
+							required
+							type="password"
+					/></label>
+					<button>Créer le compte</button>
+					<button class="secondary" data-screen="auth-login" type="button">Retour</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-account">
+			<h1 tabindex="-1">Compte connecté</h1>
+			<p data-user></p>
+			<p>Double authentification : <strong data-factor></strong></p>
+			<fieldset>
+				<button data-toggle></button>
+				<button data-add-passkey type="button">Ajouter une passkey</button>
+				<button class="secondary" data-logout>Se déconnecter</button>
+			</fieldset>
+			<p data-passkey-status hidden role="status"></p>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-setup">
+			<h1 tabindex="-1">Activer la double authentification</h1>
+			<form data-step="password">
+				<fieldset>
+					<label
+						>Mot de passe<input
+							autocomplete="current-password"
+							name="password"
+							required
+							type="password"
+					/></label>
+					<button>Continuer</button>
+				</fieldset>
+			</form>
+			<form data-step="verify" hidden>
+				<p>Scannez le QR code avec votre application d’authentification.</p>
+				<img alt="QR code de configuration TOTP" data-qr height="220" width="220" />
+				<details>
+					<summary>Clé de configuration manuelle</summary>
+					<code data-secret></code>
+				</details>
+				<fieldset>
+					<label
+						>Code à 6 chiffres<input
+							autocomplete="one-time-code"
+							inputmode="numeric"
+							name="code"
+							pattern="[0-9]{6}"
+							required
+					/></label>
+					<button>Vérifier et activer</button>
+				</fieldset>
+			</form>
+			<button class="secondary" data-cancel type="button">Retour au compte</button>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-challenge">
+			<h1 tabindex="-1">Second facteur</h1>
+			<form>
+				<fieldset>
+					<label
+						>Code<input
+							autocomplete="one-time-code"
+							inputmode="numeric"
+							name="code"
+							pattern="[0-9]{6}"
+							required
+					/></label>
+					<button>Valider</button>
+					<button class="secondary" data-screen="auth-login" type="button">
+						Retour à la connexion
+					</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+
+		<template id="auth-disable">
+			<h1 tabindex="-1">Désactiver la double authentification</h1>
+			<form>
+				<fieldset>
+					<label
+						>Mot de passe<input
+							autocomplete="current-password"
+							name="password"
+							required
+							type="password"
+					/></label>
+					<button>Désactiver</button>
+					<button class="secondary" data-cancel type="button">Retour au compte</button>
+				</fieldset>
+			</form>
+			<p role="alert"></p>
+		</template>
+	</body>
+</html>

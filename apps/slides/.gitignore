@@ -1,0 +1,30 @@
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+
+# Contrôle visuel des itinéraires (bun run routes)
+/scripts/routes-preview.png
+
+# Polices Chalet (House Industries) : licence webfont non garantie, ne pas publier
+/src/lib/assets/fonts/Chalet*.woff2

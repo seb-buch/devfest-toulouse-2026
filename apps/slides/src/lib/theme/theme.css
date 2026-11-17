@@ -1,0 +1,280 @@
+/*  Polices du thème : texte, manuscrite (titres : Chalet Comprime, plus bas)  */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400&family=Permanent+Marker&family=Yellowtail&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+/*  Police mono avec icônes Nerd Font (Nerd Fonts 3.5.1) : code, JSON et carte  */
+@font-face {
+	font-family: 'JetBrainsMono Nerd Font Mono';
+	src: url('../assets/fonts/JetBrainsMonoNerdFontMono-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-display: block;
+}
+
+@font-face {
+	font-family: 'JetBrainsMono Nerd Font Mono';
+	src: url('../assets/fonts/JetBrainsMonoNerdFontMono-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-display: block;
+}
+
+/*  Police des titres de menu de GTA V (House Industries)  */
+@font-face {
+	font-family: 'Chalet Comprime';
+	src: url('../assets/fonts/ChaletComprime-CologneSixty.woff2') format('woff2');
+	font-weight: 400;
+	font-display: block;
+}
+
+/*  Police des sous-titres de GTA V (House Industries)  */
+@font-face {
+	font-family: 'Chalet London';
+	src: url('../assets/fonts/ChaletLondon-NineteenSixty.woff2') format('woff2');
+	font-weight: 400;
+	font-display: block;
+}
+
+/*  Police des lieux et du générique de GTA V : fournie avec macOS, Yellowtail ailleurs  */
+@font-face {
+	font-family: 'SignPainter';
+	src: local('SignPainter-HouseScript'), local('SignPainter HouseScript');
+}
+
+/*
+ * Thème « Leonida Sunset » : hommage à GTA VI.
+ * Diapos de contenu claires (lisibilité en amphi), diapos titre / section sombres (classe .night).
+ * Règle : rose, orange et jaune uniquement en décoration, jamais pour du texte sur fond clair.
+ */
+
+:root {
+	--sunset-pink: #ff2e88;
+	--sunset-orange: #ff7a3d;
+	--sunset-yellow: #ffd23f;
+	--sunset-gradient: linear-gradient(
+		90deg,
+		var(--sunset-pink),
+		var(--sunset-orange),
+		var(--sunset-yellow)
+	);
+	--vice-teal: #19b8c4;
+	--night: #16102e;
+	--night-silhouette: #0c0819;
+
+	--slyd-main-font: 'Poppins';
+	--slyd-main-color: #1a1530;
+
+	/*  Oswald : secours libre si Chalet Comprime (non versionnée) est absente, ex. GitHub Pages  */
+	--slyd-headings-font: 'Chalet Comprime', 'Oswald';
+	--slyd-headings-color: #b0145a;
+	--slyd-headings-font-weight: 400;
+
+	--script-font: 'SignPainter', 'Yellowtail', cursive;
+
+	--slyd-code-font: 'JetBrainsMono Nerd Font Mono';
+
+	--slyd-base-font-size: 30px;
+
+	--slyd-presentation-bg-color: var(--night);
+
+	--slyd-slide-bg-color: #fffaf5;
+	--slyd-slide-padding: 24px 48px;
+
+	--slyd-accent-color: #b0145a;
+}
+
+/*  Presentation container  */
+main.slyd {
+	background-color: var(--slyd-presentation-bg-color);
+}
+
+/*  Slide (préfixe main.slyd : passe devant le reset « .slyd * » de Slyd)  */
+main.slyd .slyd-slide {
+	background-color: var(--slyd-slide-bg-color);
+	box-sizing: border-box;
+	padding: var(--slyd-slide-padding);
+
+	color: var(--slyd-main-color);
+	font-family: var(--slyd-main-font), sans-serif;
+	font-size: var(--slyd-base-font-size);
+	line-height: 1.5;
+
+	/*  Liseré coucher de soleil en bas des diapos claires  */
+
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 14px;
+		background: var(--sunset-gradient);
+	}
+}
+
+/*
+ * Slyd masque les diapos non courantes (display: none) : une diapo passée en flex ne doit pas
+ * l'annuler, sinon elle reste affichée derrière et ses view-transition-name font doublon.
+ */
+main.slyd:not(.overview) .slyd-slide:not(.current) {
+	display: none;
+}
+
+/*  Typographie sous :where() (spécificité minimale) : les styles propres à chaque diapo l'emportent  */
+:where(main.slyd .slyd-slide) {
+	h1,
+	h2,
+	h3 {
+		font-family: var(--slyd-headings-font), sans-serif;
+		font-weight: var(--slyd-headings-font-weight);
+		color: var(--slyd-headings-color);
+		text-transform: uppercase;
+		letter-spacing: 0.01em;
+		line-height: 1.15;
+	}
+
+	h1 {
+		font-size: 3.5em;
+	}
+
+	h2 {
+		font-size: 3em;
+	}
+
+	/*  H3 : titre de diapo de contenu, souligné en dégradé  */
+
+	h3 {
+		font-size: 2.2em;
+		margin-bottom: 0.5em;
+		padding-bottom: 0.15em;
+		border-bottom: 6px solid;
+		border-image: var(--sunset-gradient) 1;
+	}
+
+	p {
+		margin-bottom: 1em;
+	}
+
+	strong {
+		font-weight: 700;
+	}
+
+	em {
+		color: var(--slyd-accent-color);
+		font-style: normal;
+		font-weight: 600;
+	}
+
+	ol,
+	ul {
+		padding-left: 1.2em;
+	}
+
+	li::marker {
+		color: var(--sunset-pink);
+	}
+
+	code,
+	pre {
+		font-family: var(--slyd-code-font), monospace;
+	}
+
+	a {
+		color: var(--slyd-accent-color);
+		text-decoration: none;
+	}
+
+	th,
+	td {
+		padding: 0.3em;
+	}
+
+	table {
+		margin: 0 auto;
+	}
+}
+
+/*  Diapos sombres (titre, sections) : la diapo contient un élément .night  */
+main.slyd .slyd-slide:has(> .night) {
+	padding: 0;
+	background-color: var(--night);
+	color: #fff;
+
+	&::after {
+		display: none;
+	}
+}
+
+.night {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	background: linear-gradient(
+		180deg,
+		var(--night) 0%,
+		#2a1257 42%,
+		#7a1d6f 66%,
+		#d8326f 82%,
+		var(--sunset-orange) 100%
+	);
+
+	/*  Soleil couchant rayé, posé sur l'horizon  */
+
+	&::before {
+		content: '';
+		position: absolute;
+		right: 18%;
+		bottom: -290px;
+		width: 640px;
+		height: 640px;
+		border-radius: 50%;
+		background: linear-gradient(
+			180deg,
+			var(--sunset-yellow) 10%,
+			var(--sunset-orange) 50%,
+			var(--sunset-pink) 85%
+		);
+		mask: linear-gradient(
+			180deg,
+			#000 45%,
+			transparent 45%,
+			transparent 48%,
+			#000 48%,
+			#000 58%,
+			transparent 58%,
+			transparent 62%,
+			#000 62%,
+			#000 70%,
+			transparent 70%,
+			transparent 75%,
+			#000 75%
+		);
+		box-shadow: 0 0 120px rgba(255, 122, 61, 0.5);
+	}
+
+	/*  Avec une illustration (calques de SectionLoadingSlide) : pas de dégradé ni de soleil  */
+
+	&.illustrated {
+		background: var(--night);
+
+		&::before {
+			display: none;
+		}
+	}
+
+	/*  Titre façon logo : rempli du dégradé, contour blanc, ombre portée  */
+
+	.logo {
+		display: block;
+		font-family: var(--slyd-headings-font), sans-serif;
+		text-transform: uppercase;
+		line-height: 0.95;
+		color: transparent;
+		background: linear-gradient(
+			180deg,
+			var(--sunset-yellow) 0%,
+			var(--sunset-orange) 45%,
+			var(--sunset-pink) 100%
+		);
+		background-clip: text;
+		filter: drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff)
+			drop-shadow(0 -5px 0 #fff) drop-shadow(12px 14px 0 var(--night-silhouette));
+	}
+}

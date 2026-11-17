@@ -1,0 +1,220 @@
+/*
+ * Démos d'authentification : fenêtre d'application sobre aux couleurs Leonida.
+ * Variables définies dans theme/theme.css.
+ * Préfixe main.slyd : passe devant le reset « .slyd * » de Slyd.
+ */
+
+/*  Diapo de démo : la fenêtre occupe la hauteur restante sous le titre, centrée  */
+main.slyd .slyd-slide:has(> .demo-stage) {
+	display: flex;
+	flex-direction: column;
+}
+
+main.slyd .demo-stage {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+main.slyd .demo-window {
+	width: 1200px;
+	margin: 0 auto;
+	overflow: hidden;
+	background: #fff;
+	border: 4px solid var(--night);
+	border-radius: 16px;
+	box-shadow: 12px 14px 0 var(--night-silhouette);
+	font-size: 28px;
+
+	/*  Barre de titre sombre, soulignée du dégradé coucher de soleil  */
+
+	.demo-titlebar {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		padding: 14px 28px;
+		background: var(--night);
+		color: #fff;
+		font-family: var(--slyd-headings-font), sans-serif;
+		font-size: 30px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		border-bottom: 6px solid;
+		border-image: var(--sunset-gradient) 1;
+	}
+
+	.demo-lights {
+		display: flex;
+		gap: 10px;
+
+		span {
+			width: 18px;
+			height: 18px;
+			border-radius: 50%;
+			background: var(--sunset-pink);
+
+			&:nth-child(2) {
+				background: var(--sunset-orange);
+			}
+
+			&:nth-child(3) {
+				background: var(--sunset-yellow);
+			}
+		}
+	}
+
+	.demo-body {
+		padding: 40px 64px 48px;
+	}
+
+	h4 {
+		margin: 0 0 24px;
+		font-family: var(--slyd-headings-font), sans-serif;
+		font-weight: var(--slyd-headings-font-weight);
+		font-size: 44px;
+		color: var(--slyd-headings-color);
+		text-transform: uppercase;
+	}
+
+	p {
+		margin: 0 0 16px;
+	}
+
+	/*  Formulaires  */
+
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.demo-fields {
+		display: grid;
+		gap: 20px 32px;
+
+		&.two-columns {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	label {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		font-weight: 600;
+	}
+
+	input {
+		font: inherit;
+		font-weight: 400;
+		padding: 10px 18px;
+		color: var(--slyd-main-color);
+		background: var(--slyd-slide-bg-color);
+		border: 3px solid var(--night);
+		border-radius: 8px;
+
+		&:focus {
+			outline: none;
+			border-color: var(--vice-teal);
+			box-shadow: 0 0 0 5px rgb(25 184 196 / 0.3);
+		}
+	}
+
+	.demo-code {
+		width: 8ch;
+		font-family: var(--slyd-code-font), monospace;
+		font-size: 40px;
+		letter-spacing: 0.2em;
+	}
+
+	/*  Boutons : action principale, secondaire et lien  */
+
+	.demo-actions {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		margin-top: 8px;
+	}
+
+	button,
+	a.button {
+		padding: 12px 32px;
+		text-decoration: none;
+		font-family: var(--slyd-headings-font), sans-serif;
+		font-size: 30px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: #fff;
+		background: var(--slyd-accent-color);
+		border: 3px solid var(--slyd-accent-color);
+		border-radius: 8px;
+		cursor: pointer;
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: wait;
+		}
+
+		&.secondary {
+			color: var(--slyd-main-color);
+			background: transparent;
+			border-color: var(--night);
+		}
+
+		&.link {
+			padding: 0;
+			font-family: var(--slyd-main-font), sans-serif;
+			font-size: inherit;
+			font-weight: 600;
+			letter-spacing: normal;
+			text-transform: none;
+			color: var(--slyd-accent-color);
+			background: none;
+			border: none;
+		}
+	}
+
+	/*  Messages  */
+
+	.demo-error {
+		margin: 0;
+		font-weight: 600;
+		color: var(--slyd-accent-color);
+	}
+
+	.demo-info {
+		margin: 0;
+		font-weight: 600;
+		color: #0d6e76;
+	}
+
+	.demo-inline {
+		display: flex;
+		align-items: flex-end;
+		gap: 24px;
+
+		label {
+			flex: 1;
+		}
+	}
+
+	.demo-status {
+		margin: 40px 0;
+		text-align: center;
+		font-size: 34px;
+	}
+
+	.demo-badge {
+		padding: 2px 14px;
+		border-radius: 6px;
+		font-weight: 600;
+		color: #fff;
+		background: var(--slyd-main-color);
+
+		&.active {
+			background: var(--vice-teal);
+			color: var(--night);
+		}
+	}
+}

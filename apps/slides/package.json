@@ -1,0 +1,36 @@
+{
+	"name": "slides-devfest-toulouse-2026",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"dev": "bun --bun vite dev --strictPort",
+		"build": "bun --bun vite build",
+		"start": "bun --bun vite preview --port 5173 --strictPort",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --ignore-path .gitignore --ignore-path ../../.prettierignore --check . && eslint .",
+		"format": "prettier --ignore-path .gitignore --ignore-path ../../.prettierignore --write .",
+		"routes": "bun scripts/routes.ts"
+	},
+	"dependencies": {
+		"@seb-buch/slyd": "0.7.1"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-static": "^4.0.1",
+		"@sveltejs/kit": "^3.0.0",
+		"@sveltejs/vite-plugin-svelte": "^7.2.0",
+		"eslint-plugin-svelte": "^3.19.0",
+		"prettier-plugin-svelte": "^4.1.0",
+		"sharp": "^0.35.5",
+		"svelte": "^5.57.2",
+		"svelte-check": "^4.6.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.3.0"
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
+	}
+}
